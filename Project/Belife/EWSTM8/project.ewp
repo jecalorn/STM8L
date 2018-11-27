@@ -4952,6 +4952,9 @@
     <group>
         <name>User</name>
         <file>
+            <name>$PROJ_DIR$\..\ADC.c</name>
+        </file>
+        <file>
             <name>$PROJ_DIR$\..\main.c</name>
         </file>
         <file>

@@ -1,6 +1,4 @@
 ﻿D:\baiduyun\STM8L\Project\Belife\EWSTM8\STM8L15X_MD(STM8L15xx4_6)\Obj\project.pbd
-D:\baiduyun\STM8L\Project\Belife\EWSTM8\STM8L15X_MD(STM8L15xx4_6)\Obj\main.pbi
-D:\baiduyun\STM8L\Project\Belife\EWSTM8\STM8L15X_MD(STM8L15xx4_6)\Obj\OLED_I2C.pbi
 D:\baiduyun\STM8L\Project\Belife\EWSTM8\STM8L15X_MD(STM8L15xx4_6)\Obj\stm8l15x_adc.pbi
 D:\baiduyun\STM8L\Project\Belife\EWSTM8\STM8L15X_MD(STM8L15xx4_6)\Obj\stm8l15x_beep.pbi
 D:\baiduyun\STM8L\Project\Belife\EWSTM8\STM8L15X_MD(STM8L15xx4_6)\Obj\stm8l15x_clk.pbi
@@ -12,7 +10,6 @@ D:\baiduyun\STM8L\Project\Belife\EWSTM8\STM8L15X_MD(STM8L15xx4_6)\Obj\stm8l15x_f
 D:\baiduyun\STM8L\Project\Belife\EWSTM8\STM8L15X_MD(STM8L15xx4_6)\Obj\stm8l15x_gpio.pbi
 D:\baiduyun\STM8L\Project\Belife\EWSTM8\STM8L15X_MD(STM8L15xx4_6)\Obj\stm8l15x_i2c.pbi
 D:\baiduyun\STM8L\Project\Belife\EWSTM8\STM8L15X_MD(STM8L15xx4_6)\Obj\stm8l15x_irtim.pbi
-D:\baiduyun\STM8L\Project\Belife\EWSTM8\STM8L15X_MD(STM8L15xx4_6)\Obj\stm8l15x_it.pbi
 D:\baiduyun\STM8L\Project\Belife\EWSTM8\STM8L15X_MD(STM8L15xx4_6)\Obj\stm8l15x_itc.pbi
 D:\baiduyun\STM8L\Project\Belife\EWSTM8\STM8L15X_MD(STM8L15xx4_6)\Obj\stm8l15x_iwdg.pbi
 D:\baiduyun\STM8L\Project\Belife\EWSTM8\STM8L15X_MD(STM8L15xx4_6)\Obj\stm8l15x_lcd.pbi
@@ -29,3 +26,7 @@ D:\baiduyun\STM8L\Project\Belife\EWSTM8\STM8L15X_MD(STM8L15xx4_6)\Obj\stm8l15x_t
 D:\baiduyun\STM8L\Project\Belife\EWSTM8\STM8L15X_MD(STM8L15xx4_6)\Obj\stm8l15x_usart.pbi
 D:\baiduyun\STM8L\Project\Belife\EWSTM8\STM8L15X_MD(STM8L15xx4_6)\Obj\stm8l15x_wfe.pbi
 D:\baiduyun\STM8L\Project\Belife\EWSTM8\STM8L15X_MD(STM8L15xx4_6)\Obj\stm8l15x_wwdg.pbi
+D:\baiduyun\STM8L\Project\Belife\EWSTM8\STM8L15X_MD(STM8L15xx4_6)\Obj\ADC.pbi
+D:\baiduyun\STM8L\Project\Belife\EWSTM8\STM8L15X_MD(STM8L15xx4_6)\Obj\main.pbi
+D:\baiduyun\STM8L\Project\Belife\EWSTM8\STM8L15X_MD(STM8L15xx4_6)\Obj\OLED_I2C.pbi
+D:\baiduyun\STM8L\Project\Belife\EWSTM8\STM8L15X_MD(STM8L15xx4_6)\Obj\stm8l15x_it.pbi

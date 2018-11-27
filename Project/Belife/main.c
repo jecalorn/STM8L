@@ -38,6 +38,7 @@
 /* Private variables ---------------------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/
 extern void OLED_test();
+extern void ADC_test();
 
 /* Private functions ---------------------------------------------------------*/
 
@@ -52,6 +53,7 @@ void main(void)
   while (1)
   {
     OLED_test();
+    ADC_test();
   }
 }
 

@@ -255,6 +255,39 @@ void OLED_OFF(void)
 	WriteCmd(0XAE);  //OLED休眠
 }
 
+
+//--------------------------------------------------------------
+// Prototype      : void OLED_ShowChar(unsigned char x, unsigned char y, unsigned char ch[], unsigned char TextSize)
+// Calls          : 
+// Parameters     : x,y -- 起始点坐标(x:0~127, y:0~7); ch[] -- 要显示的字符串; TextSize -- 字符大小(1:6*8 ; 2:8*16)
+// Description    : 显示codetab.h中的ASCII字符,有6*8和8*16可选择
+//--------------------------------------------------------------
+void OLED_ShowChar(unsigned char x, unsigned char y, unsigned char ch, unsigned char TextSize)
+{
+	unsigned char i = 0;
+	unsigned char c = 0;
+
+    c = ch - 32;
+	switch(TextSize)
+	{
+		case 1:
+            OLED_SetPos(x,y);
+            for(i=0;i<6;i++)
+                WriteDat(F6x8[c][i]);
+            break;
+		case 2:
+            OLED_SetPos(x,y);
+            for(i=0;i<8;i++)
+                  WriteDat(F8X16[c*16+i]);
+
+            OLED_SetPos(x,y+1);
+            for(i=0;i<8;i++)
+                  WriteDat(F8X16[c*16+i+8]);
+            break;
+	}
+}
+
+
 //--------------------------------------------------------------
 // Prototype      : void OLED_ShowChar(unsigned char x, unsigned char y, unsigned char ch[], unsigned char TextSize)
 // Calls          : 
@@ -294,13 +327,13 @@ void OLED_ShowStr(unsigned char x, unsigned char y, unsigned char ch[], unsigned
 					y++;
 				}
 				OLED_SetPos(x,y);
-                WriteMultiData((unsigned char *)&F8X16[c*16], 8);
-//				for(i=0;i<8;i++)
-//					WriteDat(F8X16[c*16+i]);
+//                WriteMultiData((unsigned char *)&F8X16[c*16], 8);
+				for(i=0;i<8;i++)
+					WriteDat(F8X16[c*16+i]);
 				OLED_SetPos(x,y+1);
-                WriteMultiData((unsigned char *)&F8X16[c*16+8], 8);
-//				for(i=0;i<8;i++)
-//					WriteDat(F8X16[c*16+i+8]);
+//                WriteMultiData((unsigned char *)&F8X16[c*16+8], 8);
+				for(i=0;i<8;i++)
+					WriteDat(F8X16[c*16+i+8]);
 				x += 8;
 				j++;
 			}
@@ -358,9 +391,134 @@ void OLED_DrawBMP(unsigned char x0,unsigned char y0,unsigned char x1,unsigned ch
 }
 
 
+//--------------------------------------------------------------
+// Prototype      : void OLED_ShowNum(unsigned char x, unsigned char y, uint16_t Num)
+// Calls          : 
+// Parameters     : x,y -- 起始点坐标(x:0~127, y:0~7); Num:16位数字,
+//                  TextSize,显示codetab.h中的ASCII字符,有6*8和8*16可选择
+// Description    : 数字
+//--------------------------------------------------------------
+void OLED_ShowNum(unsigned char x, unsigned char y, uint16_t Num,unsigned char TextSize)
+{
+
+    char ch[9];
+    char i = 0;
+
+
+    if(Num<10)  //9
+    { 
+        ch[i++]= Num%10+48;
+    }
+    else if(Num<100) //98
+    {
+        ch[i++]= Num/10+48;
+        ch[i++]= Num%10+48;
+    }
+    else if(Num<1000) //988
+    {
+        ch[i++]= Num/100+48;
+        ch[i++]= Num%100/10+48;
+        ch[i++]= Num%10+48;
+    }
+    else if(Num<10000) //9999
+    {
+        ch[i++]= Num/1000+48;
+        ch[i++]= Num%1000/100+48;
+        ch[i++]= Num%100/10+48;
+        ch[i++]= Num%10+48;
+    }
+    else if(Num<100000) //99999
+    {
+        ch[i++]= Num/10000+48;
+        ch[i++]= Num%10000/1000+48;
+        ch[i++]= Num%1000/100+48;
+        ch[i++]= Num%100/10+48;
+        ch[i++]= Num%10+48;
+    } 
+    else if(Num<1000000) //999999
+    {
+        ch[i++]= Num/100000+48;
+        ch[i++]= Num%100000/10000+48;
+        ch[i++]= Num%10000/1000+48;
+        ch[i++]= Num%1000/100+48;
+        ch[i++]= Num%100/10+48;
+        ch[i++]= Num%10+48;
+    }
+    else if(Num<10000000) //999999
+    {
+        ch[i++]= Num/1000000+48;
+        ch[i++]= Num%1000000/100000+48;
+        ch[i++]= Num%100000/10000+48;
+        ch[i++]= Num%10000/1000+48;
+        ch[i++]= Num%1000/100+48;
+        ch[i++]= Num%100/10+48;
+        ch[i++]= Num%10+48;
+    }
+
+    ch[i] = '\0';
+
+    OLED_ShowStr(x, y, ch, TextSize);
+
+    return;
+//    OLED_SetPos(x,y);  
+
+    if(Num<10)  //9
+    { 
+        OLED_ShowChar(x, y, Num%10+48, TextSize);
+    }
+    else if(Num<100) //98
+    {
+        OLED_ShowChar(x, y, Num/10+48, TextSize);
+        OLED_ShowChar(x+8, y, Num%10+48, TextSize);
+    }
+    else if(Num<1000) //988
+    {
+        OLED_ShowChar(x, y, Num/100+48, TextSize);
+        OLED_ShowChar(x+8, y, Num%100/10+48, TextSize);
+        OLED_ShowChar(x+16, y, Num%10+48, TextSize);
+    }
+    else if(Num<10000) //9999
+    {
+        OLED_ShowChar(x, y, Num/1000+48, TextSize);
+        OLED_ShowChar(x+8, y, Num%1000/100+48, TextSize);
+        OLED_ShowChar(x+16, y, Num%100/10+48, TextSize);
+        OLED_ShowChar(x+24, y, Num%10+48, TextSize);
+    }
+    else if(Num<100000) //99999
+    {
+        OLED_ShowChar(x, y, Num/10000+48, TextSize);
+        OLED_ShowChar(x+8, y, Num%10000/1000+48, TextSize);
+        OLED_ShowChar(x+16, y, Num%1000/100+48, TextSize);
+        OLED_ShowChar(x+24, y, Num%100/10+48, TextSize);
+        OLED_ShowChar(x+32, y, Num%10+48, TextSize);
+    } 
+    else if(Num<1000000) //999999
+    {
+        OLED_ShowChar(x, y, Num/100000+48, TextSize);
+        OLED_ShowChar(x+8, y, Num%100000/10000+48, TextSize);
+        OLED_ShowChar(x+16, y, Num%10000/1000+48, TextSize);
+        OLED_ShowChar(x+24, y, Num%1000/100+48, TextSize);
+        OLED_ShowChar(x+32, y, Num%100/10+48, TextSize);
+        OLED_ShowChar(x+40, y, Num%10+48, TextSize);
+    }
+    else if(Num<10000000) //999999
+    {
+        OLED_ShowChar(x, y, Num/1000000+48, TextSize);
+        OLED_ShowChar(x+8, y, Num%1000000/100000+48, TextSize);
+        OLED_ShowChar(x+16, y, Num%100000/10000+48, TextSize);
+        OLED_ShowChar(x+24, y, Num%10000/1000+48, TextSize);
+        OLED_ShowChar(x+32, y, Num%1000/100+48, TextSize);
+        OLED_ShowChar(x+40, y, Num%100/10+48, TextSize);
+        OLED_ShowChar(x+48, y, Num%10+48, TextSize);
+    }
+}
+
 
 void OLED_test()
 {
+    uint16_t i = 0;
+
+
     //初始化I2C
     CLK_PeripheralClockConfig (CLK_Peripheral_I2C1,ENABLE);//开启IIC1时钟门控
     I2C_Configuration();
@@ -368,9 +526,19 @@ void OLED_test()
     Delay(0xFFFF);//需要延时一会
     OLED_Init(); 
 
+    OLED_Fill(0);
 
-    while ( 1 )
+    return;
+
+//    while ( 1 )
     {
+
+        i++;
+
+        OLED_ShowNum(40, 4, i, 2);
+//        Delay(0xFF);//延时，便于观察实验现象
+
+
 //        OLED_Fill(0x00);//全屏灭
 
 //        OLED_ShowStr(0,0,"WWW.BMTECH.COM",2);
@@ -378,15 +546,15 @@ void OLED_test()
 //        OLED_ShowStr(2,4,"WWW.BMTECH.COM",2);
 //        OLED_ShowStr(3,6,"WWW.BMTECH.COM",2);
 
-        OLED_Fill(0xFF);
-
-
-        Delay(0xFFFF);//延时，便于观察实验现象
-        Delay(0xFFFF);//延时，便于观察实验现象
-        OLED_Fill(0x00);
-
-        Delay(0xFFFF);//延时，便于观察实验现象
-        Delay(0xFFFF);//延时，便于观察实验现象
+//        OLED_Fill(0xFF);
+//
+//
+//        Delay(0xFFFF);//延时，便于观察实验现象
+//        Delay(0xFFFF);//延时，便于观察实验现象
+//        OLED_Fill(0x00);
+//
+//        Delay(0xFFFF);//延时，便于观察实验现象
+//        Delay(0xFFFF);//延时，便于观察实验现象
     }
 }
 
