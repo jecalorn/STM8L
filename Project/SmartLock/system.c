@@ -127,6 +127,7 @@ void system_sleep_timer_start()
 {
 
 #if  0
+/*--------------CLK CONFIG---------------------------------------------------*/
     /* High speed internal clock prescaler: 1 */
     CLK_SYSCLKDivConfig(CLK_SYSCLKDiv_1);
     
@@ -140,7 +141,7 @@ void system_sleep_timer_start()
     /* Enable TIM4 CLK */
     CLK_PeripheralClockConfig(CLK_Peripheral_TIM4, ENABLE);
 
-
+/*--------------TIM4 CONFIG--------------------------------------------------*/
     /* TIM4 configuration:
      - TIM4CLK is set to 16 MHz, the TIM4 Prescaler is equal to 128 so the TIM1 counter
      clock used is 16 MHz / 128 = 125 000 Hz
