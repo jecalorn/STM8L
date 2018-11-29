@@ -369,7 +369,7 @@ INTERRUPT_HANDLER(TIM4_UPD_OVF_TRG_IRQHandler,25)
     */
     
     extern void system_sleep_timer_handler();
-    void system_sleep_timer_handler()
+    void system_sleep_timer_handler();
 }
 /**
   * @brief SPI1 Interrupt routine.
